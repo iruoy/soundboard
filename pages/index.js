@@ -20,22 +20,22 @@ export default function Home() {
 
         <div className="mx-auto mt-12 grid lg:grid-cols-2">
           <a className="m-4 p-6 text-left border border-gray-200 rounded-lg transition-colors hover:text-blue-500 hover:border-blue-500 focus:text-blue-500 focus:border-blue-500" href="https://nextjs.org/docs">
-            <h3 className="mb-4 text-2xl">Documentation &rarr;</h3>
+            <h3 className="mb-4 text-2xl font-bold">Documentation &rarr;</h3>
             <p className="text-xl">Find in-depth information about Next.js features and API.</p>
           </a>
 
           <a className="m-4 p-6 text-left border border-gray-200 rounded-lg transition-colors hover:text-blue-500 hover:border-blue-500 focus:text-blue-500 focus:border-blue-500" href="https://nextjs.org/learn">
-            <h3 className="mb-4 text-2xl">Learn &rarr;</h3>
+            <h3 className="mb-4 text-2xl font-bold">Learn &rarr;</h3>
             <p className="text-xl">Learn about Next.js in an interactive course with quizzes!</p>
           </a>
 
           <a className="m-4 p-6 text-left border border-gray-200 rounded-lg transition-colors hover:text-blue-500 hover:border-blue-500 focus:text-blue-500 focus:border-blue-500" href="https://github.com/vercel/next.js/tree/master/examples">
-            <h3 className="mb-4 text-2xl">Examples &rarr;</h3>
+            <h3 className="mb-4 text-2xl font-bold">Examples &rarr;</h3>
             <p className="text-xl">Discover and deploy boilerplate example Next.js projects.</p>
           </a>
 
           <a className="m-4 p-6 text-left border border-gray-200 rounded-lg transition-colors hover:text-blue-500 hover:border-blue-500 focus:text-blue-500 focus:border-blue-500" href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app">
-            <h3 className="mb-4 text-2xl">Deploy &rarr;</h3>
+            <h3 className="mb-4 text-2xl font-bold">Deploy &rarr;</h3>
             <p className="text-xl">Instantly deploy your Next.js site to a public URL with Vercel.</p>
           </a>
         </div>
