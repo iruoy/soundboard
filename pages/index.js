@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
-        <title>Create Next App</title>
+        <title>Jason</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
