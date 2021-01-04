@@ -30,8 +30,12 @@ class Sound extends Component {
   }
 
   play() {
-    this.audio.fastSeek(0);
-    this.audio.play();
+    if (this.audio.paused) {
+      this.audio.play();
+    } else {
+      this.audio.pause();
+      this.audio.fastSeek(0);
+    }
   }
 
   render() {
