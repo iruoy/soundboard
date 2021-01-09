@@ -15,6 +15,9 @@ export default function Home() {
 
         <div className="grid md:grid-cols-2 xl:grid-cols-3">
           <Sound src="/sounds/scouting/ik_lig_er_morgen_niet_vanaf.mp3" title="Ik lig er morgen niet vanaf" />
+          <Sound src="/sounds/scouting/klusjesmannen_grote_smurf.mp3" title="Klusjesmannen - Grote Smurf" />
+          <Sound src="/sounds/scouting/klusjesmannen_hitler.mp3" title="Klusjesmannen - Hitler" />
+          <Sound src="/sounds/scouting/klusjesmannen_man_bijt_hond.mp3" title="Klusjesmannen - Man Bijt Hond" />
           <Sound src="/sounds/scouting/peniskoker.mp3" title="Peniskoker" />
         </div>
       </div>
