@@ -42,7 +42,7 @@ class Sound extends Component {
     return (
       <div className="m-4 p-6 cursor-pointer select-none bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg transition-colors hover:border-blue-500 focus:border-blue-500" onClick={this.play.bind(this)}>
         <div className="mb-4 flex justify-between items-baseline">
-          <h2 className="text-2xl font-bold">{this.props.title}</h2>
+          <p className="text-2xl font-bold">{this.props.title}</p>
           <p className="font-mono">{this.state.currentTime} / {this.state.duration}</p>
         </div>
         <div className="relative">
