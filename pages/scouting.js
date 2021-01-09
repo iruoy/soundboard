@@ -14,7 +14,8 @@ export default function Home() {
         <h2 className="pt-4 pb-8 text-6xl font-semibold text-center">Scouting</h2>
 
         <div className="grid md:grid-cols-2 xl:grid-cols-3">
-          {/* <Sound src="/sounds/scouting/1.mp3" title="1" /> */}
+          <Sound src="/sounds/scouting/ik_lig_er_morgen_niet_vanaf.mp3" title="Ik lig er morgen niet vanaf" />
+          <Sound src="/sounds/scouting/peniskoker.mp3" title="Peniskoker" />
         </div>
       </div>
     </div>
