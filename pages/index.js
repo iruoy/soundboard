@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 antialiased">
+    <div className="min-h-screen bg-yellow-400 text-black antialiased">
       <Head>
         <title>Soundboard</title>
         <link rel="icon" href="/favicon.ico" />
@@ -13,13 +13,13 @@ export default function Home() {
 
         <div className="grid md:grid-cols-2 xl:grid-cols-3">
           <a href="/dumpert">
-            <div className="m-4 p-6 cursor-pointer select-none bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg transition-colors hover:border-blue-500 focus:border-blue-500">
+            <div className="m-4 p-4 cursor-pointer select-none bg-black text-white border-8 border-black hover:border-white focus:border-white">
               <p className="text-2xl font-bold">Dumpert</p>
             </div>
           </a>
 
           <a href="/scouting">
-            <div className="m-4 p-6 cursor-pointer select-none bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg transition-colors hover:border-blue-500 focus:border-blue-500">
+            <div className="m-4 p-4 cursor-pointer select-none bg-black text-white border-8 border-black hover:border-white focus:border-white">
               <p className="text-2xl font-bold">Scouting</p>
             </div>
           </a>

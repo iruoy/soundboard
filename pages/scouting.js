@@ -3,7 +3,7 @@ import Sound from '../components/Sound'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 antialiased">
+    <div className="min-h-screen bg-yellow-400 text-black antialiased">
       <Head>
         <title>Scouting - Soundboard</title>
         <link rel="icon" href="/favicon.ico" />
