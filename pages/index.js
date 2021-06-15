@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -12,17 +13,21 @@ export default function Home() {
         <h1 className="py-8 text-7xl font-bold text-center">Soundboard</h1>
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          <a href="/dumpert">
-            <div className="w-96 min-w-full p-4 cursor-pointer select-none bg-black text-white border-8 border-black hover:border-white focus:border-white">
-              <p className="text-2xl font-bold">Dumpert</p>
-            </div>
-          </a>
+          <Link href="/dumpert">
+            <a>
+              <div className="w-96 min-w-full p-4 cursor-pointer select-none bg-black text-white border-8 border-black hover:border-white focus:border-white">
+                <p className="text-2xl font-bold">Dumpert</p>
+              </div>
+            </a>
+          </Link>
 
-          <a href="/scouting">
-            <div className="w-96 min-w-full p-4 cursor-pointer select-none bg-black text-white border-8 border-black hover:border-white focus:border-white">
-              <p className="text-2xl font-bold">Scouting</p>
-            </div>
-          </a>
+          <Link href="/scouting">
+            <a>
+              <div className="w-96 min-w-full p-4 cursor-pointer select-none bg-black text-white border-8 border-black hover:border-white focus:border-white">
+                <p className="text-2xl font-bold">Scouting</p>
+              </div>
+            </a>
+          </Link>
         </div>
       </div>
     </div>
