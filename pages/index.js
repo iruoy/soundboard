@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-yellow-400 text-black antialiased">
+    <div className="min-h-screen bg-yellow-400 font-sans text-black antialiased">
       <Head>
         <title>Soundboard</title>
         <link rel="icon" href="/favicon.ico" />
