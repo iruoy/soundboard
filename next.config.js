@@ -4,8 +4,9 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 const { withSentryConfig } = require('@sentry/nextjs');
+const withPWA = require('next-pwa');
 
-const moduleExports = {
+const moduleExports = withPWA({
   // Your existing module.exports
   async headers() {
     return [
@@ -14,7 +15,7 @@ const moduleExports = {
         headers: [
           {
             key: "Content-Security-Policy",
-            value: "default-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'none'; connect-src o771036.ingest.sentry.io vitals.vercel-insights.com; report-uri https://o771036.ingest.sentry.io/api/5909114/security/?sentry_key=b2ccd9d30f9c481babfafa79112dde1d"
+            value: "default-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'none'; connect-src o771036.ingest.sentry.io; report-uri https://o771036.ingest.sentry.io/api/5909114/security/?sentry_key=b2ccd9d30f9c481babfafa79112dde1d"
           },
           {
             key: "Permissions-Policy",
@@ -45,7 +46,11 @@ const moduleExports = {
     locales: ['nl-NL'],
     defaultLocale: 'nl-NL',
   },
-};
+
+  pwa: {
+    dest: 'public',
+  },
+});
 
 const SentryWebpackPluginOptions = {
   // Additional config options for the Sentry Webpack plugin. Keep in mind that
