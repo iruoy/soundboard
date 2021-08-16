@@ -40,6 +40,11 @@ const moduleExports = {
       }
     ]
   },
+
+  i18n: {
+    locales: ['nl-NL'],
+    defaultLocale: 'nl-NL',
+  },
 };
 
 const SentryWebpackPluginOptions = {
