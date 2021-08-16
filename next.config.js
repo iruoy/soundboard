@@ -15,7 +15,7 @@ const moduleExports = withPWA({
         headers: [
           {
             key: "Content-Security-Policy",
-            value: "default-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'none'; connect-src o771036.ingest.sentry.io; report-uri https://o771036.ingest.sentry.io/api/5909114/security/?sentry_key=b2ccd9d30f9c481babfafa79112dde1d"
+            value: "default-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'none'; connect-src 'self' o771036.ingest.sentry.io; report-uri https://o771036.ingest.sentry.io/api/5909114/security/?sentry_key=b2ccd9d30f9c481babfafa79112dde1d"
           },
           {
             key: "Permissions-Policy",
