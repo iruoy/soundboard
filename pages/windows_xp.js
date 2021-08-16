@@ -8,7 +8,6 @@ export default function Home() {
         <h2 className="pt-4 pb-8 text-4xl xl:text-6xl font-semibold text-center">Windows XP</h2>
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          <Sound src="/sounds/windows_xp/peniskoker.mp3" title="Peniskoker" />
           <Sound src="/sounds/windows_xp/Windows XP Balloon.mp3" title="Windows XP Balloon.mp3" />
           <Sound src="/sounds/windows_xp/Windows XP Battery Critical.mp3" title="Windows XP Battery Critical.mp3" />
           <Sound src="/sounds/windows_xp/Windows XP Battery Low.mp3" title="Windows XP Battery Low.mp3" />
