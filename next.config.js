@@ -14,7 +14,7 @@ const moduleExports = {
         headers: [
           {
             key: "Content-Security-Policy",
-            value: "default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src o771036.ingest.sentry.io vitals.vercel-insights.com; report-uri https://o771036.ingest.sentry.io/api/5909114/security/?sentry_key=b2ccd9d30f9c481babfafa79112dde1d"
+            value: "default-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'none'; connect-src o771036.ingest.sentry.io vitals.vercel-insights.com; report-uri https://o771036.ingest.sentry.io/api/5909114/security/?sentry_key=b2ccd9d30f9c481babfafa79112dde1d"
           },
           {
             key: "Permissions-Policy",
