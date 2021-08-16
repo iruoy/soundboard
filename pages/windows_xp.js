@@ -32,7 +32,7 @@ export default function Home() {
           <Sound src="/sounds/windows_xp/Windows XP Ringin.mp3" title="Windows XP Ringin" />
           <Sound src="/sounds/windows_xp/Windows XP Ringout.mp3" title="Windows XP Ringout" />
           <Sound src="/sounds/windows_xp/Windows XP Shutdown.mp3" title="Windows XP Shutdown" />
-          <Sound src="/sounds/windows_xp/Windows XP Start.mp3" title="Windows XP Start" />
+          {/* <Sound src="/sounds/windows_xp/Windows XP Start.mp3" title="Windows XP Start" /> */}
           <Sound src="/sounds/windows_xp/Windows XP Startup.mp3" title="Windows XP Startup" />
           <Sound src="/sounds/windows_xp/classic chimes.mp3" title="Classic chimes" />
           <Sound src="/sounds/windows_xp/classic chord.mp3" title="Classic chord" />
