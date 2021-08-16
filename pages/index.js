@@ -22,6 +22,14 @@ export default function Home() {
               </div>
             </a>
           </Link>
+
+          <Link href="/windows_xp">
+            <a>
+              <div className="min-w-full p-4 cursor-pointer select-none bg-black text-white border-8 border-black hover:border-white focus:border-white">
+                <p className="text-2xl font-bold">Windows XP</p>
+              </div>
+            </a>
+          </Link>
         </div>
       </div>
     </div>
