@@ -1,15 +1,8 @@
-import Head from 'next/head'
 import Sound from '../components/Sound'
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-yellow-400 text-black antialiased">
-      <Head>
-        <title>Scouting - Soundboard</title>
-        <meta name="description" content="iruoy's soundboard | Alle beste geluiden verzameld!" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <div className="container mx-auto px-4">
         <h1 className="pt-8 text-7xl font-bold text-center">Soundboard</h1>
         <h2 className="pt-4 pb-8 text-6xl font-semibold text-center">Scouting</h2>

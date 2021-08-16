@@ -1,15 +1,8 @@
-import Head from 'next/head'
 import Link from 'next/link'
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-yellow-400 font-sans text-black antialiased">
-      <Head>
-        <title>Soundboard</title>
-        <meta name="description" content="iruoy's soundboard | Alle beste geluiden verzameld!" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <div className="container mx-auto px-4">
         <h1 className="py-8 text-7xl font-bold text-center">Soundboard</h1>
 
