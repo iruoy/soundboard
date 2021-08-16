@@ -5,9 +5,9 @@ export default function Home() {
     <div className="min-h-screen bg-yellow-400 text-black antialiased">
       <div className="container mx-auto px-4">
         <h1 className="pt-8 text-5xl xl:text-7xl font-bold text-center">Soundboard</h1>
-        <h2 className="pt-4 pb-8 text-4xl xl:text-6xl font-semibold text-center">Dumpert</h2>
+        <h2 className="pt-4 text-4xl xl:text-6xl font-semibold text-center">Dumpert</h2>
 
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="py-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           <Sound src="/sounds/dumpert/1.mp3" title="5 euro's?" />
           <Sound src="/sounds/dumpert/2.mp3" title="Village People 360 kick" />
           <Sound src="/sounds/dumpert/3.mp3" title="Allemaal onvoldoende" />
