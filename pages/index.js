@@ -9,7 +9,7 @@ export default function Home() {
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           <Link href="/dumpert">
             <a>
-              <div className="w-96 min-w-full p-4 cursor-pointer select-none bg-black text-white border-8 border-black hover:border-white focus:border-white">
+              <div className="min-w-full p-4 cursor-pointer select-none bg-black text-white border-8 border-black hover:border-white focus:border-white">
                 <p className="text-2xl font-bold">Dumpert</p>
               </div>
             </a>
@@ -17,7 +17,7 @@ export default function Home() {
 
           <Link href="/scouting">
             <a>
-              <div className="w-96 min-w-full p-4 cursor-pointer select-none bg-black text-white border-8 border-black hover:border-white focus:border-white">
+              <div className="min-w-full p-4 cursor-pointer select-none bg-black text-white border-8 border-black hover:border-white focus:border-white">
                 <p className="text-2xl font-bold">Scouting</p>
               </div>
             </a>
