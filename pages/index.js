@@ -6,6 +6,7 @@ export default function Home() {
     <div className="min-h-screen bg-yellow-400 font-sans text-black antialiased">
       <Head>
         <title>Soundboard</title>
+        <meta name="description" content="iruoy's soundboard | Alle beste geluiden verzameld!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

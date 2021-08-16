@@ -6,6 +6,7 @@ export default function Home() {
     <div className="min-h-screen bg-yellow-400 text-black antialiased">
       <Head>
         <title>Dumpert - Soundboard</title>
+        <meta name="description" content="iruoy's soundboard | Alle beste geluiden verzameld!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
