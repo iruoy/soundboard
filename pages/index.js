@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-yellow-400 font-sans text-black antialiased">
       <div className="container mx-auto px-4">
-        <h1 className="py-8 text-7xl font-bold text-center">Soundboard</h1>
+        <h1 className="py-8 text-5xl xl:text-7xl font-bold text-center">Soundboard</h1>
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           <Link href="/dumpert">
