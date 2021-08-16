@@ -34,16 +34,16 @@ export default function Home() {
           <Sound src="/sounds/windows_xp/Windows XP Shutdown.mp3" title="Windows XP Shutdown" />
           <Sound src="/sounds/windows_xp/Windows XP Start.mp3" title="Windows XP Start" />
           <Sound src="/sounds/windows_xp/Windows XP Startup.mp3" title="Windows XP Startup" />
-          <Sound src="/sounds/windows_xp/classic chimes.mp3" title="classic chimes" />
-          <Sound src="/sounds/windows_xp/classic chord.mp3" title="classic chord" />
-          <Sound src="/sounds/windows_xp/classic ding.mp3" title="classic ding" />
-          <Sound src="/sounds/windows_xp/classic notify.mp3" title="classic notify" />
-          <Sound src="/sounds/windows_xp/classic recycle.mp3" title="classic recycle" />
-          <Sound src="/sounds/windows_xp/classic ringin.mp3" title="classic ringin" />
-          <Sound src="/sounds/windows_xp/classic ringout.mp3" title="classic ringout" />
-          <Sound src="/sounds/windows_xp/classic start.mp3" title="classic start" />
-          <Sound src="/sounds/windows_xp/classic tada.mp3" title="classic tada" />
-          <Sound src="/sounds/windows_xp/windows xp pop-up blocked.mp3" title="windows xp pop-up blocked" />
+          <Sound src="/sounds/windows_xp/classic chimes.mp3" title="Classic chimes" />
+          <Sound src="/sounds/windows_xp/classic chord.mp3" title="Classic chord" />
+          <Sound src="/sounds/windows_xp/classic ding.mp3" title="Classic ding" />
+          <Sound src="/sounds/windows_xp/classic notify.mp3" title="Classic notify" />
+          <Sound src="/sounds/windows_xp/classic recycle.mp3" title="Classic recycle" />
+          <Sound src="/sounds/windows_xp/classic ringin.mp3" title="Classic ringin" />
+          <Sound src="/sounds/windows_xp/classic ringout.mp3" title="Classic ringout" />
+          <Sound src="/sounds/windows_xp/classic start.mp3" title="Classic start" />
+          <Sound src="/sounds/windows_xp/classic tada.mp3" title="Classic tada" />
+          <Sound src="/sounds/windows_xp/windows xp pop-up blocked.mp3" title="Windows XP pop-up blocked" />
         </div>
       </div>
     </div>
