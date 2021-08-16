@@ -4,8 +4,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-yellow-400 text-black antialiased">
       <div className="container mx-auto px-4">
-        <h1 className="pt-8 text-7xl font-bold text-center">Soundboard</h1>
-        <h2 className="pt-4 pb-8 text-6xl font-semibold text-center">Dumpert</h2>
+        <h1 className="pt-8 text-5xl xl:text-7xl font-bold text-center">Soundboard</h1>
+        <h2 className="pt-4 pb-8 text-4xl xl:text-6xl font-semibold text-center">Dumpert</h2>
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           <Sound src="/sounds/dumpert/1.mp3" title="5 euro's?" />
