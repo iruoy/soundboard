@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    node {
-      label 'soundboard'
-    }
-
-  }
+  agent any
   stages {
     stage('lint') {
       steps {
