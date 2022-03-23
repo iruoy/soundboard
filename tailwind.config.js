@@ -1,16 +1,11 @@
 module.exports = {
-  mode: 'jit',
-  purge: ['./pages/**/*.js', './components/**/*.js'],
-  darkMode: false, // false, 'media' or 'class'
+  content: ['./pages/**/*.js', './components/**/*.js'],
   theme: {
     extend: {
       fontFamily: {
         sans: ['sans-serif'],
       },
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [],
 }
