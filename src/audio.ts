@@ -38,14 +38,10 @@ export interface Playback {
 }
 
 /**
- * Starts playing as soon as the sound is decoded. `onStart` receives the decoded length in
- * seconds. `onEnd` fires once, whether the sound finished by itself, was stopped, or failed to load.
+ * Starts playing as soon as the sound is decoded. `onEnd` fires once, whether the sound
+ * finished by itself, was stopped, or failed to load.
  */
-export function play(
-  url: string,
-  onStart: (duration: number) => void,
-  onEnd: () => void,
-): Playback {
+export function play(url: string, onEnd: () => void): Playback {
   const ctx = getContext();
   // Browsers start the context suspended until a user gesture; resuming from within one unlocks it.
   if (ctx.state !== "running") void ctx.resume();
@@ -68,7 +64,6 @@ export function play(
       source.onended = finish;
       source.start();
       startedAt = ctx.currentTime;
-      onStart(buffer.duration);
     },
     (error: unknown) => {
       console.error(error);

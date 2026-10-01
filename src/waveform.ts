@@ -1,27 +1,19 @@
-// A decorative waveform per sound: seeded by its name, so it looks the same on every visit
-// without having to load the audio first.
+// Draws a sound's waveform from the bar heights measured at build time (plugins/sound-meta.ts).
 
-const BARS = 48;
 const HEIGHT = 32;
-export const WAVE_VIEWBOX = `0 0 ${BARS * 4} ${HEIGHT}`;
+/** Every bar is at least this tall, so silent stretches still read as part of the wave. */
+const MIN_HEIGHT = 2;
 
-function hash(text: string): number {
-  let h = 7;
-  for (const c of text) h = (h * 31 + c.codePointAt(0)!) >>> 0;
-  return h;
+export function waveViewBox(peaks: number[]): string {
+  return `0 0 ${peaks.length * 4} ${HEIGHT}`;
 }
 
-/** SVG path data for the bars, in a `WAVE_VIEWBOX` coordinate space. */
-export function wavePath(seed: string): string {
-  let state = hash(seed);
-  const random = () => (state = (state * 1664525 + 1013904223) >>> 0) / 4294967296;
-  const peak = 0.3 + random() * 0.5;
-  let path = "";
-  for (let i = 0; i < BARS; i++) {
-    const x = i / (BARS - 1);
-    const envelope = Math.exp(-Math.pow((x - peak) / 0.32, 2)) * 0.8 + 0.2;
-    const h = Math.max(2, HEIGHT * envelope * (0.35 + 0.65 * random()));
-    path += `M${i * 4} ${((HEIGHT - h) / 2).toFixed(2)}h2.4v${h.toFixed(2)}h-2.4z`;
-  }
-  return path;
+/** SVG path data for the bars, in a `waveViewBox` coordinate space. */
+export function wavePath(peaks: number[]): string {
+  return peaks
+    .map((peak, i) => {
+      const h = Math.max(MIN_HEIGHT, (peak / 100) * HEIGHT);
+      return `M${i * 4} ${((HEIGHT - h) / 2).toFixed(2)}h2.4v${h.toFixed(2)}h-2.4z`;
+    })
+    .join("");
 }

@@ -1,12 +1,14 @@
 // Everything under /sounds is discovered at build time: drop a file or folder in and it shows up.
 
-import durations from "virtual:sound-durations";
+import soundMeta from "virtual:sound-meta";
 
 export interface Sound {
   name: string;
   url: string;
-  /** Length in seconds, when it could be read at build time. */
-  duration: number | undefined;
+  /** Length in seconds. */
+  duration: number;
+  /** Waveform bar heights, 0–100. */
+  peaks: number[];
 }
 
 export interface Folder {
@@ -56,7 +58,7 @@ function buildLibrary(): Folder[] {
     folder.sounds.push({
       name: meta?.names?.[file] ?? nameFromFile(file),
       url,
-      duration: durations[path],
+      ...soundMeta[path]!,
     });
   }
 

@@ -2,7 +2,7 @@ import { createMemo, createSignal, onSettled } from "solid-js";
 import { load, play, type Playback } from "../audio.ts";
 import type { Sound } from "../library.ts";
 import { overlap, stopAll, track, untrack } from "../player.ts";
-import { WAVE_VIEWBOX, wavePath } from "../waveform.ts";
+import { waveViewBox, wavePath } from "../waveform.ts";
 
 /** Presses longer than this count as "hold": releasing stops the sound. Shorter presses are clicks. */
 const HOLD_MS = 250;
@@ -15,18 +15,11 @@ function formatTime(seconds: number): string {
 export function SoundButton(props: { sound: Sound; index: number }) {
   const [playing, setPlaying] = createSignal(false);
   const [position, setPosition] = createSignal(0);
-  // The decoded length is exact; the build-time one lets us show something before any audio loads.
-  const [decodedDuration, setDecodedDuration] = createSignal<number>();
-  const duration = createMemo(() => decodedDuration() ?? props.sound.duration);
-  const progress = createMemo(() => {
-    const total = duration();
-    return total ? Math.min(position() / total, 1) : 0;
-  });
+  const progress = createMemo(() => Math.min(position() / props.sound.duration, 1));
 
   // Time left while playing, the full length otherwise.
   const time = createMemo(() => {
-    const total = duration();
-    if (total === undefined) return "–:––";
+    const total = props.sound.duration;
     return formatTime(Math.ceil(playing() ? Math.max(total - position(), 0) : total));
   });
 
@@ -41,11 +34,11 @@ export function SoundButton(props: { sound: Sound; index: number }) {
     frame = requestAnimationFrame(tick);
   };
 
-  const wave = createMemo(() => wavePath(props.sound.name));
+  const wave = createMemo(() => wavePath(props.sound.peaks));
 
   const start = () => {
     if (!overlap()) stopAll();
-    const current: Playback = play(props.sound.url, setDecodedDuration, () => {
+    const current: Playback = play(props.sound.url, () => {
       untrack(current);
       if (playback !== current) return;
       playback = undefined;
@@ -106,12 +99,12 @@ export function SoundButton(props: { sound: Sound; index: number }) {
       </span>
       <span class="sound-name">{props.sound.name}</span>
       <span class="wave" aria-hidden="true">
-        <svg viewBox={WAVE_VIEWBOX} preserveAspectRatio="none">
+        <svg viewBox={waveViewBox(props.sound.peaks)} preserveAspectRatio="none">
           <path d={wave()} />
         </svg>
         <svg
           class="wave-progress"
-          viewBox={WAVE_VIEWBOX}
+          viewBox={waveViewBox(props.sound.peaks)}
           preserveAspectRatio="none"
           style={{ "clip-path": `inset(0 ${100 - progress() * 100}% 0 0)` }}
         >
