@@ -19,7 +19,9 @@ Everything under `sounds/` is picked up at build time:
 - Click: play. Click again while playing: stop and rewind.
 - Hold (longer than 250 ms): plays while held, stops and rewinds on release.
 - Enter / Space on a focused sound toggles it.
-- Any number of sounds can play at once.
+- Overlap (per browser, off by default): when off, starting a sound stops the others; when on, any number can play at once.
+- Stop all stops every playing sound.
+- The button in the top right cycles the theme: system, light, dark.
 
 ## Development
 

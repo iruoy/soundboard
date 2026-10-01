@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@solidjs/web": "2.0.0-rc.13",
+    "geist": "1.7.2",
     "solid-js": "2.0.0-rc.13"
   },
   "devDependencies": {

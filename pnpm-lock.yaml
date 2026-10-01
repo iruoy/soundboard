@@ -215,6 +215,8 @@ catalogs:
 overrides:
   vite@*: npm:@voidzero-dev/vite-plus-core@1.0.0
 
+packageExtensionsChecksum: sha256-xNXJoe/LWZHQMuW9DvRq7vAoP3hgHsiu6+3ydtNSXL8=
+
 importers:
 
   .:
@@ -222,6 +224,9 @@ importers:
       '@solidjs/web':
         specifier: 2.0.0-rc.13
         version: 2.0.0-rc.13(solid-js@2.0.0-rc.13)
+      geist:
+        specifier: 1.7.2
+        version: 1.7.2
       solid-js:
         specifier: 2.0.0-rc.13
         version: 2.0.0-rc.13
@@ -1285,6 +1290,14 @@ packages:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
+
+  geist@1.7.2:
+    resolution: {integrity: sha512-Gu5lDFa3pLRyoBlBPf0QIFHVdWAnpco7fS1bJm41jyLPFoguBgiubseUN2oLXMgqZ7uxAxDoXcHMhCY/fOTTgg==}
+    peerDependencies:
+      next: '>=13.2.0'
+    peerDependenciesMeta:
+      next:
+        optional: true
 
   gensync@1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
@@ -2424,6 +2437,8 @@ snapshots:
 
   fsevents@2.3.3:
     optional: true
+
+  geist@1.7.2: {}
 
   gensync@1.0.0-beta.2: {}
 

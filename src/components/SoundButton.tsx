@@ -1,6 +1,8 @@
 import { createMemo, createSignal, onSettled } from "solid-js";
 import { load, play, type Playback } from "../audio.ts";
 import type { Sound } from "../library.ts";
+import { overlap, stopAll, track, untrack } from "../player.ts";
+import { WAVE_VIEWBOX, wavePath } from "../waveform.ts";
 
 /** Presses longer than this count as "hold": releasing stops the sound. Shorter presses are clicks. */
 const HOLD_MS = 250;
@@ -10,7 +12,7 @@ function formatTime(seconds: number): string {
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`;
 }
 
-export function SoundButton(props: { sound: Sound }) {
+export function SoundButton(props: { sound: Sound; index: number }) {
   const [playing, setPlaying] = createSignal(false);
   const [position, setPosition] = createSignal(0);
   // The decoded length is exact; the build-time one lets us show something before any audio loads.
@@ -19,6 +21,13 @@ export function SoundButton(props: { sound: Sound }) {
   const progress = createMemo(() => {
     const total = duration();
     return total ? Math.min(position() / total, 1) : 0;
+  });
+
+  // Time left while playing, the full length otherwise.
+  const time = createMemo(() => {
+    const total = duration();
+    if (total === undefined) return "–:––";
+    return formatTime(Math.ceil(playing() ? Math.max(total - position(), 0) : total));
   });
 
   let playback: Playback | undefined;
@@ -32,8 +41,12 @@ export function SoundButton(props: { sound: Sound }) {
     frame = requestAnimationFrame(tick);
   };
 
+  const wave = createMemo(() => wavePath(props.sound.name));
+
   const start = () => {
+    if (!overlap()) stopAll();
     const current: Playback = play(props.sound.url, setDecodedDuration, () => {
+      untrack(current);
       if (playback !== current) return;
       playback = undefined;
       cancelAnimationFrame(frame);
@@ -41,6 +54,7 @@ export function SoundButton(props: { sound: Sound }) {
       setPosition(0);
     });
     playback = current;
+    track(current);
     setPlaying(true);
     frame = requestAnimationFrame(tick);
   };
@@ -86,12 +100,24 @@ export function SoundButton(props: { sound: Sound }) {
       }}
       onContextMenu={(event) => event.preventDefault()}
     >
-      <span class="sound-name">{props.sound.name}</span>
-      <span class="sound-time">
-        {formatTime(position())} /{" "}
-        {duration() === undefined ? "–:––" : formatTime(Math.ceil(duration()!))}
+      <span class="sound-meta">
+        <span>{String(props.index + 1).padStart(2, "0")}</span>
+        <span>{time()}</span>
       </span>
-      <span class="sound-progress" style={{ transform: `scaleX(${progress()})` }} />
+      <span class="sound-name">{props.sound.name}</span>
+      <span class="wave" aria-hidden="true">
+        <svg viewBox={WAVE_VIEWBOX} preserveAspectRatio="none">
+          <path d={wave()} />
+        </svg>
+        <svg
+          class="wave-progress"
+          viewBox={WAVE_VIEWBOX}
+          preserveAspectRatio="none"
+          style={{ "clip-path": `inset(0 ${100 - progress() * 100}% 0 0)` }}
+        >
+          <path d={wave()} />
+        </svg>
+      </span>
     </button>
   );
 }

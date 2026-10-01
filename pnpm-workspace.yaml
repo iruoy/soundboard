@@ -8,3 +8,9 @@ peerDependencyRules:
     - vite
   allowedVersions:
     vite: "*"
+packageExtensions:
+  # Only geist's font files are used, not its next/font wrappers, so don't pull in Next.
+  geist:
+    peerDependenciesMeta:
+      next:
+        optional: true
