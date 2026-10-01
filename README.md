@@ -1,34 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Soundboard
 
-## Getting Started
+A static soundboard built with Solid 2, TypeScript 7 and Vite+.
 
-First, run the development server:
+## Adding sounds
 
-```bash
-npm run dev
-# or
-yarn dev
+Everything under `sounds/` is picked up at build time:
+
+- Drop an audio file (`mp3`, `ogg`, `wav`, `m4a`, `opus`, `flac`) into `sounds/<folder>/` to add a sound. Its name is the file name, with underscores shown as spaces.
+- Create a new directory in `sounds/` to add a folder. It gets its own page at `/<folder>/`.
+- Optionally add `sounds/<folder>/folder.json` to override display names:
+  ```json
+  { "title": "Windows XP", "names": { "1.mp3": "5 euro's?" } }
+  ```
+  Without it, `windows_xp` becomes "Windows Xp" and each sound is named after its file.
+
+## Playback
+
+- Click: play. Click again while playing: stop and rewind.
+- Hold (longer than 250 ms): plays while held, stops and rewinds on release.
+- Enter / Space on a focused sound toggles it.
+- Any number of sounds can play at once.
+
+## Development
+
+```sh
+vp install
+vp dev     # dev server
+vp check   # format, lint and type check
+vp build   # static site in dist/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`dist/` can be deployed to any static host. The site assumes it is served from the domain root; set `base` in `vite.config.ts` to serve it from a sub-path.

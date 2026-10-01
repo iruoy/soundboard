@@ -1,0 +1,201 @@
+:root {
+  --bg: #ffd400;
+  --fg: #111;
+  --tile: #111;
+  --tile-fg: #fff;
+  --accent: #ffd400;
+  --focus: #fff;
+
+  color-scheme: light;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111;
+    --fg: #ffd400;
+    --tile: #1f1f1f;
+    --tile-fg: #f5f5f5;
+    --focus: #ffd400;
+
+    color-scheme: dark;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.page {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: inherit;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back:hover,
+.back:focus-visible {
+  text-decoration: underline;
+}
+
+/* Home */
+
+.folders {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.folder {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1.5rem;
+  border: 6px solid var(--tile);
+  background: var(--tile);
+  color: var(--tile-fg);
+  text-decoration: none;
+  transition: border-color 120ms;
+}
+
+.folder:hover,
+.folder:focus-visible {
+  border-color: var(--focus);
+  outline: none;
+}
+
+.folder-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+}
+
+.folder-count {
+  opacity: 0.6;
+}
+
+/* Folder */
+
+.sounds {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr));
+}
+
+.sound {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 5.5rem;
+  padding: 1rem;
+  overflow: hidden;
+  border: 6px solid var(--tile);
+  background: var(--tile);
+  color: var(--tile-fg);
+  font: inherit;
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+
+  /* Long presses are a feature here, not a request for text selection or a context menu. */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition:
+    transform 80ms,
+    border-color 120ms;
+}
+
+.sound:hover,
+.sound:focus-visible {
+  border-color: var(--focus);
+  outline: none;
+}
+
+.sound:active {
+  transform: scale(0.97);
+}
+
+.sound.playing {
+  background: var(--accent);
+  border-color: var(--tile);
+  color: #111;
+}
+
+.sound-name,
+.sound-time {
+  position: relative;
+}
+
+.sound-time {
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.6;
+}
+
+.playing .sound-time {
+  opacity: 0.85;
+}
+
+.sound-progress {
+  position: absolute;
+  inset: auto 0 0;
+  height: 6px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.playing .sound-progress {
+  background: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sound {
+    transition: none;
+  }
+}
