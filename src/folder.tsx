@@ -63,11 +63,17 @@ function FolderPage() {
         </div>
       </header>
       {folder && (
-        <div class="grid">
+        <ul class="grid sounds">
+          {/* One <li> per sound keeps each row's component in its own insert, so the list
+              itself only tracks plain elements. */}
           <For each={folder.sounds}>
-            {(sound, index) => <SoundButton sound={sound} index={index()} />}
+            {(sound, index) => (
+              <li>
+                <SoundButton sound={sound} index={index()} />
+              </li>
+            )}
           </For>
-        </div>
+        </ul>
       )}
     </main>
   );

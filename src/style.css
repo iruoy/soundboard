@@ -366,7 +366,19 @@ a.brand:hover {
 
 /* Sounds */
 
+.sounds {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sounds > li {
+  display: flex;
+  min-width: 0;
+}
+
 .sound {
+  flex: 1;
   min-height: 200px;
   cursor: pointer;
 
