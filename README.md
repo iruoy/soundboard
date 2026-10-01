@@ -33,3 +33,14 @@ vp build   # static site in dist/
 ```
 
 `dist/` can be deployed to any static host. The site assumes it is served from the domain root; set `base` in `vite.config.ts` to serve it from a sub-path.
+
+## Cloudflare Workers deployment
+
+`wrangler.jsonc` configures the `soundboard` Worker to serve the static files in `dist/`, without a Worker script.
+
+In Cloudflare Workers Builds, use:
+
+- Build command: `pnpm run build`
+- Deploy command: `pnpm dlx wrangler deploy`
+
+Wrangler reads the Worker name, compatibility date and assets directory from the configuration file.
