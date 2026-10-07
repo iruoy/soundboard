@@ -16,7 +16,7 @@
   "devDependencies": {
     "@audio/decode": "^4.0.0",
     "@solidjs/vite-plugin": "3.0.0-next.46",
-    "@types/node": "^26.6.3",
+    "@types/node": "^26.6.4",
     "typescript": "~7.0.2",
     "vite": "catalog:",
     "vite-plus": "catalog:"
