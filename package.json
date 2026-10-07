@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vp dev",
     "build": "tsc && vp build",
-    "preview": "vp preview"
+    "preview": "vp preview",
+    "prepare": "vp config"
   },
   "dependencies": {
     "@solidjs/web": "2.0.0-rc.13",
@@ -15,8 +16,8 @@
   },
   "devDependencies": {
     "@audio/decode": "^4.0.0",
-    "@solidjs/vite-plugin": "3.0.0-next.46",
-    "@types/node": "^26.6.3",
+    "@solidjs/vite-plugin": "3.0.0-next.47",
+    "@types/node": "^26.6.4",
     "typescript": "~7.0.2",
     "vite": "catalog:",
     "vite-plus": "catalog:"

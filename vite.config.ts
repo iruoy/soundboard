@@ -7,6 +7,9 @@ import { soundMeta } from "./plugins/sound-meta.ts";
 const soundsDir = fileURLToPath(new URL("./sounds", import.meta.url));
 
 export default defineConfig({
+  staged: {
+    "*": "vp check --fix",
+  },
   plugins: [solid(), folderPages(soundsDir), soundMeta(soundsDir)],
   fmt: {},
   lint: {
