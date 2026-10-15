@@ -10,7 +10,7 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "@solidjs/web": "2.0.0-rc.13",
+    "@solidjs/web": "2.0.0-rc.14",
     "geist": "^1.7.2",
     "solid-js": "2.0.0-rc.13"
   },
