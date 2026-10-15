@@ -15,7 +15,7 @@
     "solid-js": "2.0.0-rc.13"
   },
   "devDependencies": {
-    "@audio/decode": "^4.0.0",
+    "@audio/decode": "^4.1.1",
     "@solidjs/vite-plugin": "3.0.0-next.47",
     "@types/node": "^26.6.4",
     "typescript": "~7.0.2",
