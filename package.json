@@ -10,22 +10,22 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "@solidjs/web": "2.0.0-rc.13",
-    "geist": "^1.7.2",
-    "solid-js": "2.0.0-rc.13"
+    "@solidjs/web": "2.0.0-rc.14",
+    "geist": "^1.8.1",
+    "solid-js": "2.0.0-rc.14"
   },
   "devDependencies": {
-    "@audio/decode": "^4.1.1",
+    "@audio/decode": "^4.2.0",
     "@solidjs/vite-plugin": "3.0.0-next.50",
     "@types/node": "^26.6.5",
-    "typescript": "~7.0.2",
+    "typescript": "^7.0.2",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "11.28.2",
+      "version": "12.14.0",
       "onFail": "download"
     }
   }
