@@ -10,9 +10,9 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "@solidjs/web": "2.0.0-rc.14",
+    "@solidjs/web": "2.0.0-rc.15",
     "geist": "^1.8.1",
-    "solid-js": "2.0.0-rc.14"
+    "solid-js": "2.0.0-rc.15"
   },
   "devDependencies": {
     "@audio/decode": "^4.2.0",
