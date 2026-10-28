@@ -10,13 +10,13 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "@solidjs/web": "2.0.0-rc.15",
-    "geist": "^1.8.1",
-    "solid-js": "2.0.0-rc.15"
+    "@solidjs/web": "2.0.0-rc.19",
+    "geist": "^1.8.2",
+    "solid-js": "2.0.0-rc.19"
   },
   "devDependencies": {
     "@audio/decode": "^4.2.0",
-    "@solidjs/vite-plugin": "3.0.0-next.50",
+    "@solidjs/vite-plugin": "3.0.0-next.52",
     "@types/node": "^26.6.5",
     "typescript": "^7.0.2",
     "vite": "catalog:",

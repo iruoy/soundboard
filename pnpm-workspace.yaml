@@ -1,6 +1,6 @@
 catalog:
-  vite: npm:@voidzero-dev/vite-plus-core@1.3.0
-  vite-plus: 1.3.0
+  vite: npm:@voidzero-dev/vite-plus-core@1.4.0
+  vite-plus: 1.4.0
 overrides:
   vite@*: "catalog:"
 peerDependencyRules:
@@ -22,3 +22,16 @@ permissions:
 skills:
   dirs:
     - .agents/skills
+minimumReleaseAgeExclude:
+  - "@solidjs/babel-plugin@2.0.0-rc.19"
+  - "@solidjs/compiler-darwin-arm64@2.0.0-rc.19"
+  - "@solidjs/compiler-darwin-x64@2.0.0-rc.19"
+  - "@solidjs/compiler-linux-arm64-gnu@2.0.0-rc.19"
+  - "@solidjs/compiler-linux-x64-gnu@2.0.0-rc.19"
+  - "@solidjs/compiler-wasm32-wasi@2.0.0-rc.19"
+  - "@solidjs/compiler-win32-x64-msvc@2.0.0-rc.19"
+  - "@solidjs/compiler@2.0.0-rc.19"
+  - "@solidjs/vite-plugin@3.0.0-next.52"
+  - "@solidjs/signals@2.0.0-rc.19"
+  - "@solidjs/web@2.0.0-rc.19"
+  - solid-js@2.0.0-rc.19
