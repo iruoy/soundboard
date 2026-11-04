@@ -1,13 +1,11 @@
 catalog:
-  vite: npm:@voidzero-dev/vite-plus-core@1.4.0
-  vite-plus: 1.4.0
+  vite: npm:@voidzero-dev/vite-plus-core@1.5.0
+  vite-plus: 1.5.0
 overrides:
   vite@*: "catalog:"
 peerDependencyRules:
   allowAny:
     - vite
-  allowedVersions:
-    vite: "*"
 packageExtensions:
   # Only geist's font files are used, not its next/font wrappers, so don't pull in Next.
   geist:
@@ -23,15 +21,31 @@ skills:
   dirs:
     - .agents/skills
 minimumReleaseAgeExclude:
-  - "@solidjs/babel-plugin@2.0.0-rc.19"
-  - "@solidjs/compiler-darwin-arm64@2.0.0-rc.19"
-  - "@solidjs/compiler-darwin-x64@2.0.0-rc.19"
-  - "@solidjs/compiler-linux-arm64-gnu@2.0.0-rc.19"
-  - "@solidjs/compiler-linux-x64-gnu@2.0.0-rc.19"
-  - "@solidjs/compiler-wasm32-wasi@2.0.0-rc.19"
-  - "@solidjs/compiler-win32-x64-msvc@2.0.0-rc.19"
-  - "@solidjs/compiler@2.0.0-rc.19"
-  - "@solidjs/vite-plugin@3.0.0-next.52"
-  - "@solidjs/signals@2.0.0-rc.19"
-  - "@solidjs/web@2.0.0-rc.19"
-  - solid-js@2.0.0-rc.19
+  - "@solidjs/vite-plugin@3.0.0-next.56"
+  - "@solidjs/signals@2.0.0-rc.21"
+  - "@solidjs/web@2.0.0-rc.21"
+  - solid-js@2.0.0-rc.21
+  - "@oxlint/binding-darwin-x64@1.91.0"
+  - "@oxlint/binding-freebsd-x64@1.91.0"
+  - "@oxlint/binding-linux-arm-gnueabihf@1.91.0"
+  - "@oxlint/binding-linux-arm-musleabihf@1.91.0"
+  - "@oxlint/binding-linux-ppc64-gnu@1.91.0"
+  - "@oxlint/binding-linux-riscv64-gnu@1.91.0"
+  - "@oxlint/binding-linux-riscv64-musl@1.91.0"
+  - "@oxlint/binding-linux-s390x-gnu@1.91.0"
+  - "@oxlint/binding-linux-x64-gnu@1.91.0"
+  - "@oxlint/binding-linux-x64-musl@1.91.0"
+  - "@oxlint/binding-win32-ia32-msvc@1.91.0"
+  - "@oxlint/binding-win32-x64-msvc@1.91.0"
+  - "@oxlint/plugins@1.91.0"
+  - "@voidzero-dev/vite-plus-core@1.5.0"
+  - "@voidzero-dev/vite-plus-darwin-arm64@1.5.0"
+  - "@voidzero-dev/vite-plus-darwin-x64@1.5.0"
+  - "@voidzero-dev/vite-plus-linux-arm64-gnu@1.5.0"
+  - "@voidzero-dev/vite-plus-linux-arm64-musl@1.5.0"
+  - "@voidzero-dev/vite-plus-linux-x64-gnu@1.5.0"
+  - "@voidzero-dev/vite-plus-linux-x64-musl@1.5.0"
+  - "@voidzero-dev/vite-plus-win32-arm64-msvc@1.5.0"
+  - "@voidzero-dev/vite-plus-win32-x64-msvc@1.5.0"
+  - oxlint@1.91.0
+  - vite-plus@1.5.0
