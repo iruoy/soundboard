@@ -10,13 +10,13 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "@solidjs/web": "2.0.0-rc.21",
+    "@solidjs/web": "^2.0.0",
     "geist": "^1.9.2",
-    "solid-js": "2.0.0-rc.21"
+    "solid-js": "^2.0.0"
   },
   "devDependencies": {
     "@audio/decode": "^4.3.0",
-    "@solidjs/vite-plugin": "3.0.0-next.57",
+    "@solidjs/vite-plugin": "^3.0.1",
     "@types/node": "^26.6.6",
     "typescript": "^7.0.2",
     "vite": "catalog:",
@@ -25,7 +25,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "12.18.0",
+      "version": "12.22.0",
       "onFail": "download"
     }
   }
