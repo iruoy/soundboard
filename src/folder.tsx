@@ -8,8 +8,6 @@ import "./style.css";
 
 const folder = readPageData<Folder | null>();
 
-document.title = folder ? `${folder.title} · Soundboard` : "Not found · Soundboard";
-
 function FolderPage() {
   const count = folder?.sounds.length ?? 0;
   return (

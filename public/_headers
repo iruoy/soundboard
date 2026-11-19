@@ -1,0 +1,4 @@
+# Everything under /assets/ is content-hashed by the build, so it never changes.
+# Cloudflare Workers Assets applies this file (and does not serve it as a page).
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

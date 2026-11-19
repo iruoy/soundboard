@@ -2,7 +2,7 @@ import { realpathSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { basename, join, relative, resolve, sep } from "node:path";
 import type { Plugin } from "vite-plus";
-import { discover, folderData, summaries, withPageData } from "./catalog.ts";
+import { discover, folderData, pageTitle, summaries, withPageData } from "./catalog.ts";
 import { analyse } from "./sound-meta.ts";
 
 /** Serve and build the same static pages: a small board index, and one catalog per folder. */
@@ -41,6 +41,8 @@ export function folderPages(directory: string): Plugin {
       const root = resolve(config.root ?? process.cwd());
       return {
         build: {
+          // The CSS already needs browsers that support modulepreload natively.
+          modulePreload: { polyfill: false },
           rolldownOptions: {
             input: { index: resolve(root, "index.html"), folder: resolve(root, "folder.html") },
           },
@@ -81,7 +83,7 @@ export function folderPages(directory: string): Plugin {
         ...(await devMeta(join(soundsDir, slug, file))),
         url: `${base}sounds/${encodePath(`${slug}/${file}`)}`,
       }));
-      return withPageData(html, folder);
+      return withPageData(html, folder, { title: pageTitle(folder) });
     },
 
     generateBundle: {
@@ -94,7 +96,13 @@ export function folderPages(directory: string): Plugin {
         this.addWatchFile(soundsDir);
         const boards = await discover(soundsDir);
         const assetBase = base === "./" || base === "" ? "../" : base;
-        index.source = withPageData(String(index.source), summaries(boards));
+        const fonts = Object.values(bundle)
+          .filter((item) => item.type === "asset" && item.fileName.endsWith(".woff2"))
+          .map((item) => encodePath(item.fileName))
+          .sort();
+        index.source = withPageData(String(index.source), summaries(boards), {
+          fonts: fonts.map((file) => base + file),
+        });
         delete bundle["folder.html"];
         for (const board of boards) {
           const dir = join(soundsDir, board.slug);
@@ -117,7 +125,10 @@ export function folderPages(directory: string): Plugin {
           this.emitFile({
             type: "asset",
             fileName: `${board.slug}/index.html`,
-            source: withPageData(String(page.source), folder),
+            source: withPageData(String(page.source), folder, {
+              title: pageTitle(folder),
+              fonts: fonts.map((file) => assetBase + file),
+            }),
           });
         }
       },

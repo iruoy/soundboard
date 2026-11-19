@@ -15,7 +15,11 @@ function formatTime(seconds: number): string {
 export function SoundButton(props: { sound: Sound; index: number }) {
   const [playing, setPlaying] = createSignal(false);
   const [position, setPosition] = createSignal(0);
-  const progress = createMemo(() => Math.min(position() / props.sound.duration, 1));
+  // 0.5% steps are sub-pixel on a tile, and the memo's equality skips DOM writes
+  // between steps: ~200 repaints per play instead of one per animation frame.
+  const progress = createMemo(() =>
+    Math.min(Math.round((position() / props.sound.duration) * 200) / 200, 1),
+  );
 
   // Time left while playing, the full length otherwise.
   const time = createMemo(() => {

@@ -46,4 +46,4 @@ In Cloudflare Workers Builds, use:
 - Build command: `pnpm run build`
 - Deploy command: `pnpm dlx wrangler deploy`
 
-Wrangler reads the Worker name, compatibility date and assets directory from the configuration file.
+Wrangler reads the Worker name, compatibility date and assets directory from the configuration file. `public/_headers` tells Cloudflare to cache the content-hashed files under `/assets/` immutably, so repeat visits skip re-downloading scripts, fonts and sounds.
