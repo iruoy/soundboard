@@ -1,10 +1,11 @@
 import { For } from "solid-js";
 import { render } from "@solidjs/web";
 import { TopBar } from "./components/TopBar.tsx";
-import { library } from "./library.ts";
+import { readPageData, type BoardSummary } from "./library.ts";
 import "./style.css";
 
-const total = library.reduce((sum, folder) => sum + folder.sounds.length, 0);
+const library = readPageData<BoardSummary[]>();
+const total = library.reduce((sum, folder) => sum + folder.count, 0);
 
 function Home() {
   return (
@@ -22,10 +23,13 @@ function Home() {
       <nav class="grid">
         <For each={library}>
           {(folder, index) => (
-            <a class="tile board" href={`${import.meta.env.BASE_URL}${folder.slug}/`}>
+            <a
+              class="tile board"
+              href={`${import.meta.env.BASE_URL}${encodeURIComponent(folder.slug)}/`}
+            >
               <span class="tile-meta">
                 <span>{String(index() + 1).padStart(2, "0")}</span>
-                <span>{folder.sounds.length} sounds</span>
+                <span>{folder.count} sounds</span>
               </span>
               <span class="board-footer">
                 <span class="board-title">{folder.title}</span>

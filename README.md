@@ -29,8 +29,11 @@ Everything under `sounds/` is picked up at build time:
 vp install
 vp dev     # dev server
 vp check   # format, lint and type check
+vp test    # build-output and playback regression tests
 vp build   # static site in dist/
 ```
+
+The build embeds only titles and counts in the home page. Each board page includes its own sorted sound list, durations and waveforms. Audio stays in separate, content-hashed files: hovering over or playing a sound loads it, and repeat plays reuse a decoded-audio cache capped at 32 MiB. Active playback and pending decodes are separate from that limit.
 
 `dist/` can be deployed to any static host. The site assumes it is served from the domain root; set `base` in `vite.config.ts` to serve it from a sub-path.
 

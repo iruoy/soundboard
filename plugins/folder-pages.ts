@@ -1,50 +1,124 @@
-import { readdirSync } from "node:fs";
-import { resolve } from "node:path";
+import { realpathSync } from "node:fs";
+import { readFile } from "node:fs/promises";
+import { basename, join, relative, resolve, sep } from "node:path";
 import type { Plugin } from "vite-plus";
+import { discover, folderData, summaries, withPageData } from "./catalog.ts";
+import { analyse } from "./sound-meta.ts";
 
-/**
- * Serves `folder.html` at `/<folder>/` for every directory in `soundsDir`, and emits a copy
- * at `<folder>/index.html` in the build so any static host can serve the same URLs.
- */
-export function folderPages(soundsDir: string): Plugin {
-  const folders = () =>
-    readdirSync(soundsDir, { withFileTypes: true })
-      .filter((entry) => entry.isDirectory())
-      .map((entry) => entry.name);
+/** Serve and build the same static pages: a small board index, and one catalog per folder. */
+export function folderPages(directory: string): Plugin {
+  // Match the canonical paths Vite reports in file watcher events.
+  const soundsDir = realpathSync(directory);
+  let base: string;
+  const encodePath = (path: string) =>
+    encodeURI(path).replaceAll("?", "%3F").replaceAll("#", "%23");
+
+  function slugFromUrl(url: string) {
+    const path = url.split(/[?#]/, 1)[0];
+    if (!path.startsWith(base)) return;
+    const slug = path.slice(base.length).match(/^([^/]+)\/?$/)?.[1];
+    if (slug) return decodeURIComponent(slug);
+  }
+
+  let catalog: ReturnType<typeof discover> | undefined;
+  const devBoards = () => (catalog ??= discover(soundsDir));
+  const devCache = new Map<string, ReturnType<typeof analyse>>();
+  function devMeta(file: string) {
+    let meta = devCache.get(file);
+    if (!meta) {
+      meta = readFile(file).then((data) => analyse(file, data));
+      devCache.set(file, meta);
+      meta.catch(() => {
+        if (devCache.get(file) === meta) devCache.delete(file);
+      });
+    }
+    return meta;
+  }
 
   return {
     name: "folder-pages",
-
     config: (config) => {
       const root = resolve(config.root ?? process.cwd());
       return {
         build: {
-          // Keep every sound a separate file, fetched only when it's about to be played.
-          assetsInlineLimit: 0,
           rolldownOptions: {
             input: { index: resolve(root, "index.html"), folder: resolve(root, "folder.html") },
           },
         },
       };
     },
+    configResolved(config) {
+      base = config.base;
+    },
 
     configureServer(server) {
-      server.middlewares.use((req, _res, next) => {
-        const slug = req.url?.match(/^\/([^/?#.]+)\/?(?:[?#].*)?$/)?.[1];
-        if (slug && folders().includes(decodeURIComponent(slug))) req.url = "/folder.html";
-        next();
+      server.watcher.add(soundsDir).on("all", (_event, file) => {
+        if (!file.startsWith(soundsDir + sep)) return;
+        catalog = undefined;
+        devCache.delete(file);
+        server.ws.send({ type: "full-reload" });
+      });
+      server.middlewares.use(async (req, _res, next) => {
+        try {
+          const slug = slugFromUrl(req.url ?? "");
+          if (slug && (await devBoards()).some((board) => board.slug === slug)) {
+            req.url = `${base}folder.html`;
+          }
+          next();
+        } catch (error) {
+          next(error);
+        }
       });
     },
 
+    async transformIndexHtml(html, ctx) {
+      if (!ctx.server) return;
+      const slug = slugFromUrl(ctx.originalUrl ?? ctx.path);
+      const boards = await devBoards();
+      if (basename(ctx.filename) !== "folder.html") return withPageData(html, summaries(boards));
+      const board = boards.find((board) => board.slug === slug);
+      const folder = await folderData(board, async (file, slug) => ({
+        ...(await devMeta(join(soundsDir, slug, file))),
+        url: `${base}sounds/${encodePath(`${slug}/${file}`)}`,
+      }));
+      return withPageData(html, folder);
+    },
+
     generateBundle: {
-      // Vite emits the HTML pages in its own generateBundle hook, so run after it.
+      // The two processed HTML templates (including Vite's preload links) are ready here.
       order: "post",
-      handler(_options, bundle) {
+      async handler(_options, bundle) {
+        const index = bundle["index.html"];
         const page = bundle["folder.html"];
-        if (page?.type !== "asset") return;
+        if (index?.type !== "asset" || page?.type !== "asset") return;
+        this.addWatchFile(soundsDir);
+        const boards = await discover(soundsDir);
+        const assetBase = base === "./" || base === "" ? "../" : base;
+        index.source = withPageData(String(index.source), summaries(boards));
         delete bundle["folder.html"];
-        for (const slug of folders()) {
-          this.emitFile({ type: "asset", fileName: `${slug}/index.html`, source: page.source });
+        for (const board of boards) {
+          const dir = join(soundsDir, board.slug);
+          this.addWatchFile(dir);
+          const folder = await folderData(board, async (file) => {
+            const path = join(dir, file);
+            this.addWatchFile(path);
+            const data = await readFile(path);
+            const ref = this.emitFile({
+              type: "asset",
+              name: file,
+              originalFileName: relative(process.cwd(), path),
+              source: data,
+            });
+            return {
+              ...(await analyse(path, data)),
+              url: assetBase + encodePath(this.getFileName(ref)),
+            };
+          });
+          this.emitFile({
+            type: "asset",
+            fileName: `${board.slug}/index.html`,
+            source: withPageData(String(page.source), folder),
+          });
         }
       },
     },

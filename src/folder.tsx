@@ -2,13 +2,11 @@ import { For } from "solid-js";
 import { render } from "@solidjs/web";
 import { SoundButton } from "./components/SoundButton.tsx";
 import { TopBar } from "./components/TopBar.tsx";
-import { findFolder } from "./library.ts";
+import { readPageData, type Folder } from "./library.ts";
 import { overlap, playingCount, setOverlap, stopAll } from "./player.ts";
 import "./style.css";
 
-// Each folder is served at /<slug>/ from the same page, so the URL says which one to show.
-const slug = decodeURIComponent(location.pathname.split("/").filter(Boolean).at(-1) ?? "");
-const folder = findFolder(slug);
+const folder = readPageData<Folder | null>();
 
 document.title = folder ? `${folder.title} · Soundboard` : "Not found · Soundboard";
 
