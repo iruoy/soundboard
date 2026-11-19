@@ -28,7 +28,7 @@ it("ships board summaries on the index and only local, playable sounds on each b
     for (const page of ["index.html", "folder.html"])
       await writeFile(
         join(root, page),
-        "<html><head><title>Soundboard</title></head><body></body></html>",
+        '<html><head><meta name="description" content="Home" /><title>Soundboard</title></head><body></body></html>',
       );
     await writeFile(
       join(soundsDir, "first", "folder.json"),
@@ -54,6 +54,12 @@ it("ships board summaries on the index and only local, playable sounds on each b
     expect(first.title).toBe(title);
     expect(await readFile(join(dist, "first/index.html"), "utf8")).toContain(
       "<title>A &lt;/script&gt; &amp; $&amp; · Soundboard</title>",
+    );
+    expect(await readFile(join(dist, "first/index.html"), "utf8")).toContain(
+      '<meta name="description" content="2 sounds on the A &lt;/script&gt; &amp; $&amp; board. Tap one to play it." />',
+    );
+    expect(await readFile(join(dist, "index.html"), "utf8")).toContain(
+      '<meta name="description" content="Home" />',
     );
     expect(first.sounds.map((s) => s.name)).toEqual(["Clip 2", "Clip 10"]);
     expect(other.sounds.map((s) => s.name)).toEqual(["Other, clip"]);

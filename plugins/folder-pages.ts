@@ -2,7 +2,14 @@ import { realpathSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { basename, join, relative, resolve, sep } from "node:path";
 import type { Plugin } from "vite-plus";
-import { discover, folderData, pageTitle, summaries, withPageData } from "./catalog.ts";
+import {
+  discover,
+  folderData,
+  pageDescription,
+  pageTitle,
+  summaries,
+  withPageData,
+} from "./catalog.ts";
 import { analyse } from "./sound-meta.ts";
 
 /** Serve and build the same static pages: a small board index, and one catalog per folder. */
@@ -83,7 +90,10 @@ export function folderPages(directory: string): Plugin {
         ...(await devMeta(join(soundsDir, slug, file))),
         url: `${base}sounds/${encodePath(`${slug}/${file}`)}`,
       }));
-      return withPageData(html, folder, { title: pageTitle(folder) });
+      return withPageData(html, folder, {
+        title: pageTitle(folder),
+        description: pageDescription(folder),
+      });
     },
 
     generateBundle: {
@@ -127,6 +137,7 @@ export function folderPages(directory: string): Plugin {
             fileName: `${board.slug}/index.html`,
             source: withPageData(String(page.source), folder, {
               title: pageTitle(folder),
+              description: pageDescription(folder),
               fonts: fonts.map((file) => assetBase + file),
             }),
           });

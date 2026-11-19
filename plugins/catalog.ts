@@ -62,7 +62,11 @@ export async function folderData(
 }
 
 function escapeHtml(text: string): string {
-  return text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+  return text
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 }
 
 /** The browser tab title for a board page, or for a missing board. */
@@ -70,16 +74,29 @@ export function pageTitle(folder: Folder | null): string {
   return folder ? `${folder.title} · Soundboard` : "Not found · Soundboard";
 }
 
+/** The search-result snippet for a board page, or for a missing board. */
+export function pageDescription(folder: Folder | null): string {
+  if (!folder) return "This board doesn't exist (anymore). Pick another one from the home page.";
+  const count = folder.sounds.length;
+  return `${count} ${count === 1 ? "sound" : "sounds"} on the ${folder.title} board. Tap one to play it.`;
+}
+
 export function withPageData(
   html: string,
   data: BoardSummary[] | Folder | null,
-  options: { title?: string; fonts?: string[] } = {},
+  options: { title?: string; description?: string; fonts?: string[] } = {},
 ): string {
-  const { title, fonts = [] } = options;
+  const { title, description, fonts = [] } = options;
   let out = html;
   // Set the title in the HTML so the tab is right before any script runs.
   if (title)
     out = out.replace(/<title>[^<]*<\/title>/, () => `<title>${escapeHtml(title)}</title>`);
+  // Replace the templates' default description, which is written for the home page.
+  if (description)
+    out = out.replace(
+      /(<meta\s+name="description"\s+content=")[^"]*"/,
+      (_, start: string) => `${start}${escapeHtml(description)}"`,
+    );
   // Fonts are otherwise only discovered once the stylesheet has loaded.
   const preloads = fonts.map(
     (href) => `<link rel="preload" href="${href}" as="font" type="font/woff2" crossorigin>\n`,
