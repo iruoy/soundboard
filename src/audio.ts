@@ -1,7 +1,28 @@
 // Web Audio playback: near-instant starts and any number of overlapping sounds.
 
 let context: AudioContext | undefined;
-const buffers = new Map<string, Promise<AudioBuffer>>();
+// Bounds reusable PCM (~87 seconds of stereo at 48 kHz), not in-flight decodes or live sources.
+const PCM_BUDGET = 32 * 1024 * 1024;
+const pending = new Map<string, Promise<AudioBuffer>>();
+const decoded = new Map<string, AudioBuffer>(); // Oldest use first.
+let decodedBytes = 0;
+
+function pcmBytes(buffer: AudioBuffer): number {
+  return buffer.length * buffer.numberOfChannels * Float32Array.BYTES_PER_ELEMENT;
+}
+
+function remember(url: string, buffer: AudioBuffer): void {
+  const bytes = pcmBytes(buffer);
+  if (bytes > PCM_BUDGET) return; // Play it without displacing reusable clips.
+
+  for (const [key, oldest] of decoded) {
+    if (decodedBytes + bytes <= PCM_BUDGET) break;
+    decoded.delete(key); // Playing sources keep their own reference.
+    decodedBytes -= pcmBytes(oldest);
+  }
+  decoded.set(url, buffer);
+  decodedBytes += bytes;
+}
 
 function getContext(): AudioContext {
   if (!context) {
@@ -14,20 +35,31 @@ function getContext(): AudioContext {
   return context;
 }
 
-/** Fetch and decode a sound once; later calls reuse the same buffer. */
+/** Share in-flight fetches/decodes and reuse recently loaded sounds. */
 export function load(url: string): Promise<AudioBuffer> {
-  let buffer = buffers.get(url);
-  if (!buffer) {
-    buffer = fetch(url)
-      .then((response) => {
-        if (!response.ok) throw new Error(`Failed to load ${url}: ${response.status}`);
-        return response.arrayBuffer();
-      })
-      .then((data) => getContext().decodeAudioData(data));
-    buffer.catch(() => buffers.delete(url));
-    buffers.set(url, buffer);
+  const cached = decoded.get(url);
+  if (cached) {
+    decoded.delete(url);
+    decoded.set(url, cached);
+    return Promise.resolve(cached);
   }
-  return buffer;
+
+  const loading = pending.get(url);
+  if (loading) return loading;
+
+  const result = fetch(url)
+    .then((response) => {
+      if (!response.ok) throw new Error(`Failed to load ${url}: ${response.status}`);
+      return response.arrayBuffer();
+    })
+    .then((data) => getContext().decodeAudioData(data))
+    .then((buffer) => {
+      remember(url, buffer);
+      return buffer;
+    })
+    .finally(() => pending.delete(url));
+  pending.set(url, result);
+  return result;
 }
 
 export interface Playback {

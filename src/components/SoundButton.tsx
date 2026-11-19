@@ -102,14 +102,16 @@ export function SoundButton(props: { sound: Sound; index: number }) {
         <svg viewBox={waveViewBox(props.sound.peaks)} preserveAspectRatio="none">
           <path d={wave()} />
         </svg>
-        <svg
-          class="wave-progress"
-          viewBox={waveViewBox(props.sound.peaks)}
-          preserveAspectRatio="none"
-          style={{ "clip-path": `inset(0 ${100 - progress() * 100}% 0 0)` }}
-        >
-          <path d={wave()} />
-        </svg>
+        {playing() && (
+          <svg
+            class="wave-progress"
+            viewBox={waveViewBox(props.sound.peaks)}
+            preserveAspectRatio="none"
+            style={{ "clip-path": `inset(0 ${100 - progress() * 100}% 0 0)` }}
+          >
+            <path d={wave()} />
+          </svg>
+        )}
       </span>
     </button>
   );

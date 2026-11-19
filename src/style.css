@@ -8,8 +8,8 @@
 
 @font-face {
   font-family: "Geist Mono";
-  src: url("../node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2") format("woff2");
-  font-weight: 100 900;
+  src: url("../node_modules/geist/dist/fonts/geist-mono/GeistMono-Regular.woff2") format("woff2");
+  font-weight: 400;
   font-display: swap;
 }
 
@@ -429,12 +429,6 @@ a.brand:hover {
   fill: var(--wave-playing);
 }
 
-.wave .wave-progress {
-  fill: var(--bg);
-  opacity: 0;
-}
-
 .playing .wave .wave-progress {
   fill: var(--bg);
-  opacity: 1;
 }
