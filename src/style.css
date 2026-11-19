@@ -375,6 +375,9 @@ a.brand:hover {
 .sounds > li {
   display: flex;
   min-width: 0;
+  /* Long boards only lay out and paint tiles near the viewport; 200px is the tile minimum. */
+  content-visibility: auto;
+  contain-intrinsic-block-size: auto 200px;
 }
 
 .sound {

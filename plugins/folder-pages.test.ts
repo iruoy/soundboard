@@ -26,7 +26,10 @@ it("ships board summaries on the index and only local, playable sounds on each b
     for (const slug of ["first", "other_board"])
       await mkdir(join(soundsDir, slug), { recursive: true });
     for (const page of ["index.html", "folder.html"])
-      await writeFile(join(root, page), "<html><head></head><body></body></html>");
+      await writeFile(
+        join(root, page),
+        "<html><head><title>Soundboard</title></head><body></body></html>",
+      );
     await writeFile(
       join(soundsDir, "first", "folder.json"),
       JSON.stringify({ title, names: { "10.wav": "Clip 10" } }),
@@ -49,6 +52,9 @@ it("ships board summaries on the index and only local, playable sounds on each b
     const first: Folder = await readData("first/index.html");
     const other: Folder = await readData("other_board/index.html");
     expect(first.title).toBe(title);
+    expect(await readFile(join(dist, "first/index.html"), "utf8")).toContain(
+      "<title>A &lt;/script&gt; &amp; $&amp; · Soundboard</title>",
+    );
     expect(first.sounds.map((s) => s.name)).toEqual(["Clip 2", "Clip 10"]);
     expect(other.sounds.map((s) => s.name)).toEqual(["Other, clip"]);
     for (const sound of [...first.sounds, ...other.sounds]) {
