@@ -12,7 +12,7 @@
   "dependencies": {
     "@solidjs/web": "^2.0.1",
     "geist": "^1.9.2",
-    "solid-js": "^2.0.1"
+    "solid-js": "^2.0.3"
   },
   "devDependencies": {
     "@audio/decode": "^4.3.0",
